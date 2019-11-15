@@ -6,12 +6,12 @@
 /*   By: mkarkaus <mkarkaus@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 13:06:17 by mkarkaus          #+#    #+#             */
-/*   Updated: 2019/11/14 16:20:00 by mkarkaus         ###   ########.fr       */
+/*   Updated: 2019/11/15 16:24:26 by mkarkaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUFF_SIZE
-# define BUFF_SIZE 4
+# define BUFF_SIZE 20
 
 int		get_next_line(const int fd, char **line);
 
