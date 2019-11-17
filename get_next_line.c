@@ -17,10 +17,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void		ft_makeline(char **line, char **tab, int fd)
+void		ft_makeline(char **line, char **tab, const int fd)
 {
 	size_t	k;
-	char	*temp;
+	char	*temp = NULL;
 
 	k = 0;
 	while (tab[fd][k] != '\n' && tab[fd][k] != '\0')
@@ -29,22 +29,24 @@ void		ft_makeline(char **line, char **tab, int fd)
 	{
 		*line = ft_strsub(tab[fd], 0, k);
 		temp = ft_strdup(tab[fd] + (k + 1));
-		free(tab[fd]);
+		ft_strclr(tab[fd]);
 		tab[fd] = temp;
 	}
 	else
 	{
-		*line = ft_strsub(tab[fd], 0, k);
-		free(tab[fd]);
+		*line = ft_strdup(tab[fd]);
+		ft_strclr(tab[fd]);
 	}
 }
 int			get_next_line(const int fd, char **line)
 {
-	size_t		ret;
-	static char	*tab[4864];
+	ssize_t		ret;
+	static char	*tab[4000];
 	char		buf[BUFF_SIZE + 1];
 
-	line = NULL;
+	ret = 0;
+	if (fd < 0 || !line)
+		return (-1);
 	while ((ret = read(fd, buf, BUFF_SIZE)))
 	{
 		buf[ret] = '\0';
@@ -52,10 +54,8 @@ int			get_next_line(const int fd, char **line)
 			tab[fd] = ft_strjoin(tab[fd], buf);
 		if (tab[fd] == NULL)
 			tab[fd] = ft_strdup(buf);
-		if ((ft_strchr(tab[fd], '\n') != NULL))
-			break ;
-	}	
-	ft_makeline(line, &tab[fd], fd);
+	}
+	ft_makeline(line, tab, fd);
 	if (ret == 0)
 		return (0);
 	return (1);

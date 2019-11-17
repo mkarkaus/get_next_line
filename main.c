@@ -17,14 +17,21 @@
 
 int		main()
 {
-	int		fd;
+	int	fd;
+	int	fd2;
 	char	*line;
 
 	fd = open("text1", O_RDONLY);
-//	fd2 = open("text2", O_RDONLY);
+	fd2 = open("text2", O_RDONLY);
+//	line = "nappi";
+//	while (line)
+//	{
+		get_next_line(fd, &line);
+		printf("%s", line);
+//	}
+	get_next_line(fd2, &line);
+	printf("%s", line);
 	get_next_line(fd, &line);
 	printf("%s", line);
-//	get_next_line(fd2, &line);
-//	printf("%s", line);
 	return (0);
 }
