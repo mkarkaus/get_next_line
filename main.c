@@ -19,19 +19,29 @@ int		main()
 {
 	int	fd;
 	int	fd2;
+	int	i;
 	char	*line;
 
+	i = 0;
 	fd = open("text1", O_RDONLY);
 	fd2 = open("text2", O_RDONLY);
-//	line = "nappi";
-//	while (line)
-//	{
-		get_next_line(fd, &line);
-		printf("%s", line);
-//	}
-	get_next_line(fd2, &line);
-	printf("%s", line);
-	get_next_line(fd, &line);
-	printf("%s", line);
+	line = "nappi";
+	while (line)
+	{
+		if (i % 2 == 0)
+		{
+			get_next_line(fd, &line);
+			printf("%s", line);
+		}
+		if (i % 2 != 0)
+		{
+			get_next_line(fd2, &line);
+			printf("%s", line);
+		}
+		if (line[0] == '\0')
+			break ;
+		printf("%c", '\n');
+		i++;
+	}
 	return (0);
 }
