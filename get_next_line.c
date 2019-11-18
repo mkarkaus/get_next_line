@@ -23,6 +23,8 @@ void		ft_makeline(char **line, char **tab, const int fd)
 	char	*temp = NULL;
 
 	k = 0;
+	while (*tab[fd] == '\n')
+		tab[fd]++;
 	while (tab[fd][k] != '\n' && tab[fd][k] != '\0')
 		k++;
 	if (tab[fd][k] == '\n')
@@ -45,7 +47,7 @@ int			get_next_line(const int fd, char **line)
 	char		buf[BUFF_SIZE + 1];
 
 	ret = 0;
-	if (fd < 0 || !line)
+	if (fd < 0 || !line || BUFF_SIZE < 1)
 		return (-1);
 	while ((ret = read(fd, buf, BUFF_SIZE)))
 	{
@@ -55,8 +57,8 @@ int			get_next_line(const int fd, char **line)
 		if (tab[fd] == NULL)
 			tab[fd] = ft_strdup(buf);
 	}
-	ft_makeline(line, tab, fd);
-	if (ret == 0)
+	if (!tab[fd] && ret == 0)
 		return (0);
+	ft_makeline(line, tab, fd);
 	return (1);
 }

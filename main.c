@@ -23,8 +23,8 @@ int		main()
 	char	*line;
 
 	i = 0;
-	fd = open("text1", O_RDONLY);
-	fd2 = open("text2", O_RDONLY);
+	fd = open("some_lines.txt", O_RDONLY);
+	fd2 = open("text1", O_RDONLY);
 	line = "nappi";
 	while (line)
 	{
