@@ -6,7 +6,7 @@
 /*   By: mkarkaus <mkarkaus@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 13:03:14 by mkarkaus          #+#    #+#             */
-/*   Updated: 2019/11/19 19:42:55 by mkarkaus         ###   ########.fr       */
+/*   Updated: 2019/11/20 18:49:20 by mkarkaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-void		ft_makeline(char **line, char **tab, const int fd)
+size_t		ft_makeline(char **line, char **tab, const int fd)
 {
 	size_t	k;
 	char	*temp;
@@ -25,16 +25,21 @@ void		ft_makeline(char **line, char **tab, const int fd)
 		k++;
 	if (tab[fd][k] == '\n')
 	{
-		*line = ft_strsub(tab[fd], 0, k);
-		temp = ft_strdup(tab[fd] + (k + 1));
+		if (!(*line = ft_strsub(tab[fd], 0, k)))
+			return (-1);
+		if (!(temp = ft_strdup(tab[fd] + (k + 1))))
+			return (-1);
 		free(tab[fd]);
 		tab[fd] = temp;
 	}
 	else
 	{
-		*line = ft_strdup(tab[fd]);
+		if (!(*line = ft_strsub(tab[fd], 0, k)))
+			return (-1);
 		free(tab[fd]);
+		return (0);
 	}
+	return (1);
 }
 
 int			get_next_line(const int fd, char **line)
@@ -49,7 +54,7 @@ int			get_next_line(const int fd, char **line)
 		return (-1);
 	if (tab[fd] == NULL)
 		tab[fd] = ft_strnew(0);
-	while ((ret = read(fd, buf, BUFF_SIZE)))
+	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
 		temp = ft_strjoin(tab[fd], buf);
@@ -58,8 +63,9 @@ int			get_next_line(const int fd, char **line)
 		if (ft_strchr(tab[fd], '\n') != NULL)
 			break ;
 	}
-	ft_makeline(line, tab, fd);
-	if (tab[fd][0] == '\0' && ret == 0)
+	if (ret < 0  || (ret = ft_makeline(line, tab, fd)) < 0)
+		return (-1);
+	if (ret == 0)
 		return (0);
 	return (1);
 }
