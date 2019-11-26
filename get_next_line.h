@@ -6,7 +6,7 @@
 /*   By: mkarkaus <mkarkaus@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 13:06:17 by mkarkaus          #+#    #+#             */
-/*   Updated: 2019/11/20 18:47:02 by mkarkaus         ###   ########.fr       */
+/*   Updated: 2019/11/25 14:23:42 by mkarkaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 # define BUFF_SIZE 8
 # define MAX_FD 4864
 # include "libft/libft.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
 
 int		get_next_line(const int fd, char **line);
 
