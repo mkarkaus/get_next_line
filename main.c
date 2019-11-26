@@ -20,8 +20,9 @@ int		main()
 	int	fd2;
 	int	i;
 	char	*line;
+	char	*temp;
 
-//	line = NULL;
+	temp = "nuppi";
 	i = 0;
 	fd = open("text1", O_RDONLY);
 //	dup2(fd, 500);
@@ -32,31 +33,31 @@ int		main()
 //	printf("%s", line);
 //	free(line);
 
-//	while (line)
-//	{
-//		if (i % 2 == 0)
-//		{
+	while (temp)
+	{
+		if (i % 2 == 0)
+		{
 			get_next_line(fd, &line);
 			printf("%s", line);
-			free(line);
-//		}
-//		if (i % 2 != 0)
-//		{
+		}
+		if (i % 2 != 0)
+		{
 			get_next_line(fd2, &line);
 			printf("%s", line);
-			free(line);
-//		}
-//		if (line[0] == '\0')
-//			break ;
-//		printf("%c", '\n');
-//		i++;
-//	}
-	get_next_line(fd, &line);
-	printf("%s", line);
-	free(line);
-	while (1)
-	{
-	
+		}
+		temp = line;
+		if (line[0] == '\0')
+			break ;
+		free(line);
+		printf("%c", '\n');
+		i++;
 	}
+//	get_next_line(fd, &line);
+//	printf("%s", line);
+//	free(line);
+//	while (1)
+//	{
+	
+//	}
 	return (0);
 }
