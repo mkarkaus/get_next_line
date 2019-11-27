@@ -6,7 +6,7 @@
 /*   By: mkarkaus <mkarkaus@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 16:54:39 by mkarkaus          #+#    #+#             */
-/*   Updated: 2019/11/25 14:47:26 by mkarkaus         ###   ########.fr       */
+/*   Updated: 2019/11/27 11:03:35 by mkarkaus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,18 @@
 
 int		main()
 {
+	char	*line;
 	int	fd;
+
 	int	fd2;
 	int	i;
-	char	*line;
 	char	*temp;
-
-	temp = "nuppi";
-	i = 0;
-	fd = open("text1", O_RDONLY);
-//	dup2(fd, 500);
 	fd2 = open("text4", O_RDONLY);
-	line = "nuppi";
+	temp = " ";
+	i = 0;
 
-//	get_next_line(fd, &line);
-//	printf("%s", line);
-//	free(line);
+	fd = open("text1", O_RDONLY);
+	line = " ";
 
 	while (temp)
 	{
@@ -45,19 +41,22 @@ int		main()
 			get_next_line(fd2, &line);
 			printf("%s", line);
 		}
-		temp = line;
+		temp = line;	
 		if (line[0] == '\0')
 			break ;
 		free(line);
 		printf("%c", '\n');
 		i++;
 	}
-//	get_next_line(fd, &line);
-//	printf("%s", line);
-//	free(line);
-//	while (1)
-//	{
-	
-//	}
+
+	// while (get_next_line(fd, &line))
+	// {
+	// 	printf("%s", line);
+	// 	printf("%c", '\n');
+	// 	if (line[0] == '\0')
+	// 		break ;
+	// }
+
+//	while (1);
 	return (0);
 }
